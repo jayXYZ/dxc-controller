@@ -16,11 +16,11 @@ function PlayerForm() {
     p1name: "",
     p1deck: "",
     p1record: "",
-    p1gameswon: "",
+    p1gameswon: 0,
     p2name: "",
     p2deck: "",
     p2record: "",
-    p2gameswon: "",
+    p2gameswon: 0,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -28,8 +28,8 @@ function PlayerForm() {
   };
 
   const handleSubmit = () => {
-    setData((prev) => ({ ...prev, ...inputs }));
-    socket.emit("update_data", { ...data, ...inputs });
+    setData((prev) => ({ ...prev!, ...inputs }));
+    socket.emit("update_data", { ...data!, ...inputs });
   };
 
   return (
