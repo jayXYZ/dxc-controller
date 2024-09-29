@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/lib/components/ui/input";
 
 interface Props<T> {
   results?: T[];
@@ -9,7 +9,7 @@ interface Props<T> {
   value?: string;
 }
 
-const LiveSearch = <T extends object>({
+const LiveSearch = <T extends string>({
   results = [],
   renderItem,
   value,
@@ -84,7 +84,7 @@ const LiveSearch = <T extends object>({
   }, [value]);
 
   return (
-    <div className= "flex items-center justify-center">
+    <div className="flex items-center justify-center">
       <div
         tabIndex={1}
         onBlur={resetSearchComplete}
