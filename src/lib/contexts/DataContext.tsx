@@ -6,15 +6,16 @@ export type Data = {
   p1deck: string;
   p1life: number;
   p1record: string;
-  p1gameswon: number;
+  p1gameswon: number | null;
   p2name: string;
   p2deck: string;
   p2life: number;
   p2record: string;
-  p2gameswon: number;
+  p2gameswon: number | null;
   event: string;
   format: string;
   commentators: string;
+  round: string;
   cardimage: string;
   timerExpiry: Date;
   timerIsRunning: boolean;

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { Input } from "@/lib/components/ui/input";
+import { Input } from "@/components/ui/input";
 
 interface Props<T> {
   results?: T[];

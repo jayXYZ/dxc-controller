@@ -1,9 +1,12 @@
 import { useState } from "react";
 import "./App.css";
-import { socket } from "@/lib/utils";
+import { socket } from "@/lib/utils/utils";
 import { Data, DataContext } from "@/lib/contexts/DataContext";
 import Controller from "@/lib/pages/controller";
-import { ThemeProvider } from "@/lib/components/theme-provider";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Overlay from "@/lib/pages/overlay";
+import Overlay2 from "@/lib/pages/overlay2";
+import Card from "@/lib/pages/card";
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -24,22 +27,16 @@ function App() {
   });
 
   return (
-    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-      <DataContext.Provider value={value}>
-        <h4 className="absolute top-[20px] right-10">
-          {connected ? "Connected" : "Disconnected"}
-        </h4>
-        <div
-          className={
-            "absolute top-[28px] right-6 rounded-full h-[10px] w-[10px] " +
-            (connected ? "bg-green-500" : "bg-red-500")
-          }
-        ></div>
-        <div className="flex justify-center items-center h-screen py-6 px-6">
-          <Controller />
-        </div>
-      </DataContext.Provider>
-    </ThemeProvider>
+    <DataContext.Provider value={value}>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Controller connected={connected} />} />
+          <Route path="/overlay" element={<Overlay />} />
+          <Route path="/overlay2" element={<Overlay2 />} />
+          <Route path="/card" element={<Card />} />
+        </Routes>
+      </Router>
+    </DataContext.Provider>
   );
 }
 

@@ -6,16 +6,16 @@ import {
   CardContent,
   CardHeader,
   CardFooter,
-} from "@/lib/components/ui/card";
+} from "@/components/ui/card";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/lib/components/ui/select";
+} from "@/components/ui/select";
 import * as Scry from "scryfall-sdk";
-import { socket } from "@/lib/utils";
+import { socket } from "@/lib/utils/utils";
 
 function CardImagePicker() {
   const { data, setData } = useContext(DataContext);
@@ -76,7 +76,7 @@ function CardImagePicker() {
       <CardContent>
         <img
           src={data?.cardimage}
-          className="w-full object-contain min-h-0 max-h-[60vh]"
+          className="object-contain min-h-0 max-h-[60vh]"
         />
       </CardContent>
       <CardFooter>

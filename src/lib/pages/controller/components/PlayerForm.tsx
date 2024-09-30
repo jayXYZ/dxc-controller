@@ -1,14 +1,14 @@
 import React, { useContext, useState } from "react";
-import { socket } from "@/lib/utils";
+import { socket } from "@/lib/utils/utils";
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
   CardFooter,
-} from "@/lib/components/ui/card";
-import { Input } from "@/lib/components/ui/input";
-import { Button } from "@/lib/components/ui/button";
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { DataContext } from "@/lib/contexts/DataContext";
 function PlayerForm() {
   const { data, setData } = useContext(DataContext);
@@ -16,11 +16,11 @@ function PlayerForm() {
     p1name: "",
     p1deck: "",
     p1record: "",
-    p1gameswon: 0,
+    p1gameswon: null,
     p2name: "",
     p2deck: "",
     p2record: "",
-    p2gameswon: 0,
+    p2gameswon: null,
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,9 +62,10 @@ function PlayerForm() {
                 />
                 <Input
                   placeholder="Games Won"
-                  value={inputs.p1gameswon}
+                  value={inputs.p1gameswon ?? ""}
                   onChange={handleChange}
                   name="p1gameswon"
+                  type="number"
                 />
               </div>
             </div>
@@ -97,9 +98,10 @@ function PlayerForm() {
                 />
                 <Input
                   placeholder="Games Won"
-                  value={inputs.p2gameswon}
+                  value={inputs.p2gameswon ?? ""}
                   onChange={handleChange}
                   name="p2gameswon"
+                  type="number"
                 />
               </div>
             </div>
