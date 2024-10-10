@@ -1,8 +1,23 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext } from "@/lib/contexts/DataContext";
+import { useTimer } from "@/lib/hooks/useTimer.ts"
 
 function Overlay() {
   const { data } = useContext(DataContext);
+  const {
+    totalSeconds,
+    seconds,
+    minutes,
+    restart,
+  } = useTimer({ expiryTimestamp: new Date(), autoStart: data?.timerIsRunning ?? false });
+
+  const leadingZeroSeconds = seconds < 10 ? `0${seconds}` : seconds;
+  const leadingZeroMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const negativeTime = totalSeconds < 0;
+
+  useEffect(() => {
+    restart(new Date(data?.timerExpiry ?? ''), data?.timerIsRunning);
+}, [data?.timerExpiry, data?.timerIsRunning, restart])
 
   return (
     <div className="text-[#fff]">
@@ -38,9 +53,9 @@ function Overlay() {
           }
         ></div>
 
-        {/* <div className={'absolute left-0 right-0 mt-auto mb-auto text-center text-[56px] pt-[20px] ' + (negativeTime ? 'text-red-500' : '')}>
+        <div className={'absolute left-0 right-0 mt-auto mb-auto text-center text-[56px] pt-[20px] ' + (negativeTime ? 'text-red-500' : '')}>
                     {negativeTime ? '-' : ''}{leadingZeroMinutes}:{leadingZeroSeconds}
-                </div> */}
+                </div>
 
         <div
           className={

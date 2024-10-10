@@ -10,6 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DataContext } from "@/lib/contexts/DataContext";
+
 function PlayerForm() {
   const { data, setData } = useContext(DataContext);
   const [inputs, setInputs] = useState({
@@ -21,6 +22,9 @@ function PlayerForm() {
     p2deck: "",
     p2record: "",
     p2gameswon: null,
+    round: "",
+    commentators: "",
+    event: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,79 +38,103 @@ function PlayerForm() {
 
   return (
     <Card>
-      <div className="flex flex-row">
-        <div>
-          <CardHeader>
-            <CardTitle>Player 1</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-2">
-              <Input
-                placeholder="Name"
-                value={inputs.p1name}
-                onChange={handleChange}
-                name="p1name"
-              />
-              <Input
-                placeholder="Deck"
-                value={inputs.p1deck}
-                onChange={handleChange}
-                name="p1deck"
-              />
-              <div className="flex flex-row gap-2">
+      <div className="flex flex-col gap-2">
+        <div className="flex flex-row">
+          <div>
+            <CardHeader>
+              <CardTitle>Player 1</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2">
                 <Input
-                  placeholder="Record"
-                  value={inputs.p1record}
+                  placeholder="Name"
+                  value={inputs.p1name}
                   onChange={handleChange}
-                  name="p1record"
+                  name="p1name"
                 />
                 <Input
-                  placeholder="Games Won"
-                  value={inputs.p1gameswon ?? ""}
+                  placeholder="Deck"
+                  value={inputs.p1deck}
                   onChange={handleChange}
-                  name="p1gameswon"
-                  type="number"
+                  name="p1deck"
                 />
+                <div className="flex flex-row gap-2">
+                  <Input
+                    placeholder="Record"
+                    value={inputs.p1record}
+                    onChange={handleChange}
+                    name="p1record"
+                  />
+                  <Input
+                    placeholder="Games Won"
+                    value={inputs.p1gameswon ?? ""}
+                    onChange={handleChange}
+                    name="p1gameswon"
+                    type="number"
+                  />
+                </div>
               </div>
-            </div>
-          </CardContent>
-        </div>
-        <div>
-          <CardHeader>
-            <CardTitle>Player 2</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-col gap-2">
-              <Input
-                placeholder="Name"
-                value={inputs.p2name}
-                onChange={handleChange}
-                name="p2name"
-              />
-              <Input
-                placeholder="Deck"
-                value={inputs.p2deck}
-                onChange={handleChange}
-                name="p2deck"
-              />
-              <div className="flex flex-row gap-2">
+            </CardContent>
+          </div>
+          <div>
+            <CardHeader>
+              <CardTitle>Player 2</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="flex flex-col gap-2">
                 <Input
-                  placeholder="Record"
-                  value={inputs.p2record}
+                  placeholder="Name"
+                  value={inputs.p2name}
                   onChange={handleChange}
-                  name="p2record"
+                  name="p2name"
                 />
                 <Input
-                  placeholder="Games Won"
-                  value={inputs.p2gameswon ?? ""}
+                  placeholder="Deck"
+                  value={inputs.p2deck}
                   onChange={handleChange}
-                  name="p2gameswon"
-                  type="number"
+                  name="p2deck"
                 />
+                <div className="flex flex-row gap-2">
+                  <Input
+                    placeholder="Record"
+                    value={inputs.p2record}
+                    onChange={handleChange}
+                    name="p2record"
+                  />
+                  <Input
+                    placeholder="Games Won"
+                    value={inputs.p2gameswon ?? ""}
+                    onChange={handleChange}
+                    name="p2gameswon"
+                    type="number"
+                  />
+                </div>
               </div>
-            </div>
-          </CardContent>
+            </CardContent>
+          </div>
         </div>
+        <CardContent>
+          <div className="flex flex-row gap-2">
+            <Input
+              placeholder="Event Name"
+              value={inputs.event}
+              onChange={handleChange}
+              name="event"
+            />
+            <Input
+              placeholder="Commentators"
+              value={inputs.commentators}
+              onChange={handleChange}
+              name="commentators"
+            />
+            <Input
+              placeholder="Round"
+              value={inputs.round}
+              onChange={handleChange}
+              name="round"
+            />
+          </div>
+        </CardContent>
       </div>
       <CardFooter>
         <Button className="w-full" onClick={handleSubmit}>
