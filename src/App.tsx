@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { socket } from "@/lib/utils/utils";
 import { Data, DataContext } from "@/lib/contexts/DataContext";
@@ -9,22 +9,34 @@ import Overlay2 from "@/lib/pages/overlay2";
 import Card from "@/lib/pages/card";
 
 function App() {
-  const [connected, setConnected] = useState(false);
-  const [data, setData] = useState<Data | null>(null);
+  const [connected, setConnected] = useState(socket.connected);
+  const [data, setData] = useState({});
   const value = { data, setData };
 
-  socket.on("connect", () => {
-    setConnected(true);
-    socket.emit("request_data");
-  });
+  useEffect(() => {
+    function onConnect() {
+      setConnected(true);
+      socket.emit('request_data');
+    }
 
-  socket.on("server_update", (updatedData: Data) => {
-    setData(updatedData);
-  });
+    function onDisconnect() {
+      setConnected(false);
+    }
 
-  socket.on("disconnect", () => {
-    setConnected(false);
-  });
+    function onServerUpdate(newdata: Data) {
+      setData(newdata);
+    }
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
+    socket.on('server_update', onServerUpdate);
+
+    return () => {
+      socket.off('connect', onConnect);
+      socket.off('disconnect', onDisconnect);
+      socket.off('server_update', onServerUpdate);
+    }
+  }, [])
 
   return (
     <DataContext.Provider value={value}>

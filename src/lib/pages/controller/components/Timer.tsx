@@ -2,6 +2,7 @@ import { useContext } from 'react';
 import { DataContext } from "@/lib/contexts/DataContext";
 import { useTimer } from "@/lib/hooks/useTimer.ts"
 import { Button } from "@/components/ui/button";
+import { socket } from "@/lib/utils/utils"
 import {
     Card,
     CardContent,
@@ -11,7 +12,7 @@ import {
 } from "@/components/ui/card";
 
 function Timer() {
-    const { data, setData } = useContext(DataContext);
+    const { data } = useContext(DataContext);
     const {
         totalSeconds,
         seconds,
@@ -28,21 +29,24 @@ function Timer() {
 
     const handlePause = () => {
         pause();
-        setData((prev) => ({...prev!, timerIsRunning: false}));
+        socket.emit("update_data", {timerIsRunning: false})
+        // setData((prev) => ({...prev!, timerIsRunning: false}));
     }
     
     const handleResume = () => {
         const time = new Date();
         time.setMilliseconds(time.getMilliseconds() + (totalSeconds * 1000));
         resume();
-        setData((prev) => ({...prev!, timerIsRunning: true, timerExpiry: time}));
+        // setData((prev) => ({...prev!, timerIsRunning: true, timerExpiry: time}));
+        socket.emit("update_data", {timerIsRunning: true, timerExpiry: time})
     }
     
     const handleReset = () => {
         const time = new Date();
         time.setMilliseconds(time.getMilliseconds() + (3000000)); // Add offset variable?
         restart(time, false);
-        setData((prev) => ({...prev!, timerIsRunning: false, timerExpiry: time}));
+        // setData((prev) => ({...prev!, timerIsRunning: false, timerExpiry: time}));
+        socket.emit("update_data", {timerIsRunning: false, timerExpiry: time})
     }
 
     return (

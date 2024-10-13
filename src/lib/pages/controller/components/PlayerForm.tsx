@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { DataContext } from "@/lib/contexts/DataContext";
 
 function PlayerForm() {
-  const { data, setData } = useContext(DataContext);
+  const { data } = useContext(DataContext);
   const [inputs, setInputs] = useState({
     p1name: "",
     p1deck: "",
@@ -32,8 +32,7 @@ function PlayerForm() {
   };
 
   const handleSubmit = () => {
-    setData((prev) => ({ ...prev!, ...inputs }));
-    socket.emit("update_data", { ...data!, ...inputs });
+    socket.emit("update_data", { ...data, ...inputs });
   };
 
   return (

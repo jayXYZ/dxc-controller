@@ -30,11 +30,11 @@ function Overlay() {
           <div className="text-[48px] text-right">
             {data?.p1name ?? "Player 1"}
           </div>
-          <div className="mt-[-10px]">
-            <span className="text-[36px] text-white/60 mr-10">
+          <div className="mt-[-10px] flex justify-between">
+            <span className="text-[36px] text-white/60">
               {data?.p1record ?? "0-0"}
             </span>
-            <span className="text-[36px] text-[#C6AD65] text-right">
+            <span className="text-[36px] text-[#C6AD65]">
               {data?.p1deck ?? "Deck 1"}
             </span>
           </div>
@@ -54,19 +54,19 @@ function Overlay() {
         ></div>
 
         <div className={'absolute left-0 right-0 mt-auto mb-auto text-center text-[56px] pt-[20px] ' + (negativeTime ? 'text-red-500' : '')}>
-                    {negativeTime ? '-' : ''}{leadingZeroMinutes}:{leadingZeroSeconds}
-                </div>
+          {negativeTime ? '-' : ''}{leadingZeroMinutes}:{leadingZeroSeconds}
+        </div>
 
         <div
           className={
             "absolute left-[58%] top-[30px] w-[20px] h-[20px] rounded-full outline outline-white outline-offset-4 " +
-            ((data?.p1gameswon ?? 0) < 1 ? "" : "bg-white")
+            ((data?.p2gameswon ?? 0) < 1 ? "" : "bg-white")
           }
         ></div>
         <div
           className={
             "absolute left-[58%] bottom-[30px] w-[20px] h-[20px] rounded-full outline outline-white outline-offset-4 " +
-            ((data?.p1gameswon ?? 0) < 2 ? "" : "bg-white")
+            ((data?.p2gameswon ?? 0) < 2 ? "" : "bg-white")
           }
         ></div>
 
@@ -74,11 +74,11 @@ function Overlay() {
           <div className="text-[48px] text-left">
             {data?.p2name ?? "Player 2"}
           </div>
-          <div className="mt-[-10px]">
-            <span className="text-[36px] text-[#C6AD65] text-left">
+          <div className="mt-[-10px] flex justify-between">
+            <span className="text-[36px] text-[#C6AD65]">
               {data?.p2deck ?? "Deck 2"}
             </span>
-            <span className="text-[36px] text-white/60 ml-10 text-right">
+            <span className="text-[36px] text-white/60">
               {data?.p2record ?? "0-0"}
             </span>
           </div>

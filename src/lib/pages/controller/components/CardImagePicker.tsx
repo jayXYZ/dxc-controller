@@ -18,7 +18,7 @@ import * as Scry from "scryfall-sdk";
 import { socket } from "@/lib/utils/utils";
 
 function CardImagePicker() {
-  const { data, setData } = useContext(DataContext);
+  const { data } = useContext(DataContext);
   const [input, setInput] = useState<string>("");
   const [cardlist, setCardlist] = useState<string[]>([]);
   const [prints, setPrints] = useState<Scry.Card[]>([]);
@@ -40,24 +40,22 @@ function CardImagePicker() {
     // fetch og printing first
     const ogprinting = printings.findIndex((x) => !x.reprint);
     setSelectedIndex(ogprinting);
-    setData((prevState) => ({
-      ...prevState!,
-      cardimage: printings[ogprinting]?.image_uris?.png ?? "",
-    }));
+    // setData((prevState) => ({
+    //   ...prevState!,
+    //   cardimage: printings[ogprinting]?.image_uris?.png ?? "",
+    // }));
     socket.emit("update_data", {
-      ...data,
-      cardimage: printings[ogprinting]?.image_uris?.png ?? "",
+      cardimage: printings[ogprinting]?.image_uris?.png ?? ""
     });
   }
 
   function handlePrintSelect(value: string) {
     setSelectedIndex(parseInt(value));
-    setData((prevState) => ({
-      ...prevState!,
-      cardimage: prints[parseInt(value)]?.image_uris?.png ?? "",
-    }));
+    // setData((prevState) => ({
+    //   ...prevState!,
+    //   cardimage: prints[parseInt(value)]?.image_uris?.png ?? "",
+    // }));
     socket.emit("update_data", {
-      ...data,
       cardimage: prints[parseInt(value)]?.image_uris?.png ?? "",
     });
   }
