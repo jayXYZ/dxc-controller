@@ -50,7 +50,7 @@ function Timer() {
     }
 
     return (
-        <Card>
+        <Card className='min-h-full'>
             <CardHeader>
                 <CardTitle>Timer</CardTitle>
             </CardHeader>
