@@ -10,5 +10,5 @@
 [x] Add dark mode toggle
 [ ] Add info button with modal that explains the project
 [x] Nest components into top bar
-[ ] Add timer card
+[x] Add timer card
 [ ] Add life override card
