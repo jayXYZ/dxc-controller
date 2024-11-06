@@ -10,22 +10,37 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DataContext } from "@/lib/contexts/DataContext";
+import { RefreshCcw, X } from "lucide-react";
+
+const initialState = {
+  p1name: "",
+  p1deck: "",
+  p1record: "",
+  p1gameswon: null,
+  p2name: "",
+  p2deck: "",
+  p2record: "",
+  p2gameswon: null,
+  round: "",
+  commentators: "",
+  event: "",
+};
 
 function PlayerForm() {
   const { data } = useContext(DataContext);
-  const [inputs, setInputs] = useState({
-    p1name: "",
-    p1deck: "",
-    p1record: "",
-    p1gameswon: null,
-    p2name: "",
-    p2deck: "",
-    p2record: "",
-    p2gameswon: null,
-    round: "",
-    commentators: "",
-    event: "",
-  });
+  const [inputs, setInputs] = useState<{
+    p1name: string;
+    p1deck: string;
+    p1record: string;
+    p1gameswon: number | null;
+    p2name: string;
+    p2deck: string;
+    p2record: string;
+    p2gameswon: number | null;
+    round: string;
+    commentators: string;
+    event: string;
+  }>(initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputs((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -35,8 +50,37 @@ function PlayerForm() {
     socket.emit("update_data", { ...data, ...inputs });
   };
 
+  const handleSync = () => {
+    setInputs({
+      p1name: data.p1name || "",
+      p1deck: data.p1deck || "",
+      p1record: data.p1record || "",
+      p1gameswon: data.p1gameswon ?? null,
+      p2name: data.p2name || "",
+      p2deck: data.p2deck || "",
+      p2record: data.p2record || "",
+      p2gameswon: data.p2gameswon ?? null,
+      round: data.round || "",
+      commentators: data.commentators || "",
+      event: data.event || "",
+    });
+  };
+
+  const handleClear = () => {
+    setInputs(initialState);
+  };
+
   return (
     <Card>
+      <div className="flex flex-row-reverse">
+        <Button variant="ghost" size="icon" onClick={handleClear}>
+          <X />
+        </Button>
+        <Button variant="ghost" size="icon" onClick={handleSync}>
+          <RefreshCcw />
+        </Button>
+      </div>
+
       <div className="flex flex-col gap-2">
         <div className="flex flex-row">
           <div>
