@@ -12,4 +12,4 @@
 [x] Nest components into top bar
 [x] Add timer card
 [ ] Add life override card
-[ ] Fix white space besides icons on controller card
+[x] Fix white space besides icons on controller card

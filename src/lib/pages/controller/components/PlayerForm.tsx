@@ -71,13 +71,13 @@ function PlayerForm() {
   };
 
   return (
-    <Card>
-      <div className="flex flex-row-reverse">
-        <Button variant="ghost" size="icon" onClick={handleClear}>
-          <X />
-        </Button>
+    <Card className="relative">
+      <div className="absolute right-0">
         <Button variant="ghost" size="icon" onClick={handleSync}>
           <RefreshCcw />
+        </Button>
+        <Button variant="ghost" size="icon" onClick={handleClear}>
+          <X />
         </Button>
       </div>
 
