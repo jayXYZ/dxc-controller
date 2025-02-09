@@ -14,7 +14,10 @@ import {
 function Timer() {
   const { data } = useContext(DataContext);
   const { totalSeconds, seconds, minutes, isRunning, pause, resume, restart } =
-    useTimer({ expiryTimestamp: data?.timerExpiry, autoStart: false });
+    useTimer({ 
+      expiryTimestamp: data?.timerExpiry ? new Date(data.timerExpiry) : new Date(), 
+      autoStart: false 
+    });
 
   const leadingZeroSeconds = seconds < 10 ? `0${seconds}` : seconds;
   const leadingZeroMinutes = minutes < 10 ? `0${minutes}` : minutes;
@@ -43,7 +46,7 @@ function Timer() {
   };
 
   return (
-    <Card className="min-h-full">
+    <Card className="min-h-full w-full">
       <CardHeader>
         <CardTitle>Timer</CardTitle>
       </CardHeader>
