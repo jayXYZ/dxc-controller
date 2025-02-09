@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { socket } from "@/lib/utils/utils";
 import {
   Card,
@@ -69,6 +69,10 @@ function PlayerForm() {
   const handleClear = () => {
     setInputs(initialState);
   };
+
+  useEffect(() => {
+    handleSync();
+  }, [data]);
 
   return (
     <Card className="relative">
