@@ -53,13 +53,20 @@ function Spicerack() {
     
     const handlePrefill = () => {
         if (selectedPlayer1 && selectedPlayer2) {
+            console.log("Selected player 1 decklist:", selectedPlayer1.decklist?.plaintext_list);
+            console.log("Selected player 2 decklist:", selectedPlayer2.decklist?.plaintext_list);
+            
             const newData = {
                 ...data,
                 p1name: `${selectedPlayer1.user.first_name} ${selectedPlayer1.user.last_name}`,
                 p2name: `${selectedPlayer2.user.first_name} ${selectedPlayer2.user.last_name}`,
                 p1deck: selectedPlayer1.decklist?.archetype,
-                p2deck: selectedPlayer2.decklist?.archetype
+                p2deck: selectedPlayer2.decklist?.archetype,
+                p1decklist: selectedPlayer1.decklist?.plaintext_list,
+                p2decklist: selectedPlayer2.decklist?.plaintext_list,
+                deckviewstate: "p1"
             };
+            console.log("Emitting new data:", newData);
             socket.emit("update_data", {...newData });
         }
     }
