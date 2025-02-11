@@ -16,8 +16,15 @@ import {
     CardTitle,
     CardFooter,
 } from "@/components/ui/card";
+import {
+    HoverCard,
+    HoverCardContent,
+    HoverCardTrigger,
+} from "@/components/ui/hover-card"
 import { DataContext } from "@/lib/contexts/DataContext";
 import { socket } from '@/lib/utils/utils';
+import { List } from 'lucide-react';
+
 
 function Spicerack() {
     const [registrants, setRegistrants] = useState<any>(null)
@@ -80,38 +87,66 @@ function Spicerack() {
             </CardHeader>
             <CardContent className="space-y-4">
                 <Label>Player 1</Label>
-                <Select value={selectedPlayer1?.id} onValueChange={(value) => {
-                    const player = registrants.find((r: any) => r.id === value);
-                    setSelectedPlayer1(player);
-                }}>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select Player 1" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {registrants.map((registrant: any) => (
-                            <SelectItem key={registrant.id} value={registrant.id}>
-                                {registrant.user.first_name} {registrant.user.last_name} - {registrant.decklist?.archetype}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                <div className="flex flex-row gap-2">
+                    <Select value={selectedPlayer1?.id} onValueChange={(value) => {
+                        const player = registrants.find((r: any) => r.id === value);
+                        setSelectedPlayer1(player);
+                    }}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select Player 1" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {registrants.map((registrant: any) => (
+                                <SelectItem key={registrant.id} value={registrant.id}>
+                                    {registrant.user.first_name} {registrant.user.last_name} - {registrant.decklist?.archetype}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <HoverCard>
+                        <HoverCardTrigger>
+                            <Button variant="outline">
+                                <List />
+                            </Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent>
+                            <div className="flex flex-col gap-2">
+                                <p className="whitespace-pre text-xs">{selectedPlayer1?.decklist?.plaintext_list}</p>
+                            </div>
+                        </HoverCardContent>
+                    </HoverCard>
+                </div>
                 <br />
                 <Label>Player 2</Label>
-                <Select value={selectedPlayer2?.id} onValueChange={(value) => {
-                    const player = registrants.find((r: any) => r.id === value);
-                    setSelectedPlayer2(player);
-                }}>
-                    <SelectTrigger>
-                        <SelectValue placeholder="Select Player 2" />
-                    </SelectTrigger>
-                    <SelectContent>
-                        {registrants.map((registrant: any) => (
-                            <SelectItem key={registrant.id} value={registrant.id}>
-                                {registrant.user.first_name} {registrant.user.last_name} - {registrant.decklist?.archetype}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
+                <div className="flex flex-row gap-2">
+                    <Select value={selectedPlayer2?.id} onValueChange={(value) => {
+                        const player = registrants.find((r: any) => r.id === value);
+                        setSelectedPlayer2(player);
+                    }}>
+                        <SelectTrigger>
+                            <SelectValue placeholder="Select Player 2" />
+                        </SelectTrigger>
+                        <SelectContent>
+                            {registrants.map((registrant: any) => (
+                                <SelectItem key={registrant.id} value={registrant.id}>
+                                    {registrant.user.first_name} {registrant.user.last_name} - {registrant.decklist?.archetype}
+                                </SelectItem>
+                            ))}
+                        </SelectContent>
+                    </Select>
+                    <HoverCard>
+                        <HoverCardTrigger>
+                            <Button variant="outline">
+                                <List />
+                            </Button>
+                        </HoverCardTrigger>
+                        <HoverCardContent>
+                            <div className="flex flex-col gap-2">
+                                <p className="whitespace-pre text-xs">{selectedPlayer2?.decklist?.plaintext_list}</p>
+                            </div>
+                        </HoverCardContent>
+                    </HoverCard>
+                </div>
             </CardContent>
             <CardFooter>
                 <Button onClick={handlePrefill} className="w-full">Submit</Button>
