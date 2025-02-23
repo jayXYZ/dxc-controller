@@ -7,7 +7,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Overlay from "@/lib/pages/overlay";
 import Overlay2 from "@/lib/pages/overlay2";
 import Card from "@/lib/pages/card";
-import DeckDisplay from "@/lib/pages/deck";
+import Deck1 from "@/lib/pages/deck1";
+import Deck2 from "@/lib/pages/deck2";
 
 function App() {
   const [connected, setConnected] = useState(socket.connected);
@@ -47,7 +48,8 @@ function App() {
           <Route path="/overlay" element={<Overlay />} />
           <Route path="/overlay2" element={<Overlay2 />} />
           <Route path="/card" element={<Card />} />
-          <Route path="/deck" element={<DeckDisplay />} />
+          <Route path="/deck1" element={<Deck1 />} />
+          <Route path="/deck2" element={<Deck2 />} />
         </Routes>
       </Router>
     </DataContext.Provider>
