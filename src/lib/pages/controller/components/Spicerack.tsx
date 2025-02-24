@@ -116,9 +116,9 @@ function Spicerack() {
                                 <List />
                             </Button>
                         </HoverCardTrigger>
-                        <HoverCardContent>
+                        <HoverCardContent side="top" align="start" className="max-h-[500px] overflow-y-auto">
                             <div className="flex flex-col gap-2">
-                                <p className="whitespace-pre text-xs">{selectedPlayer1?.decklist?.plaintext_list}</p>
+                                <p className="whitespace-pre text-sm">{selectedPlayer1?.decklist?.plaintext_list}</p>
                             </div>
                         </HoverCardContent>
                     </HoverCard>
@@ -147,9 +147,9 @@ function Spicerack() {
                                 <List />
                             </Button>
                         </HoverCardTrigger>
-                        <HoverCardContent>
+                        <HoverCardContent side="top" align="start" className="max-h-[500px] overflow-y-auto">
                             <div className="flex flex-col gap-2">
-                                <p className="whitespace-pre text-xs">{selectedPlayer2?.decklist?.plaintext_list}</p>
+                                <p className="whitespace-pre text-sm">{selectedPlayer2?.decklist?.plaintext_list}</p>
                             </div>
                         </HoverCardContent>
                     </HoverCard>
