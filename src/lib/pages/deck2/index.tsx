@@ -42,7 +42,7 @@ const Deck2 = () => {
               if (name === "Plains" || name === "Island" || name === "Swamp" || name === "Mountain" || name === "Forest") {
                 card = await Scry.Cards.byName(name, "LEB")
               } else {
-                const searchQuery = `"${name}" not:reprint legal:premodern`;
+                const searchQuery = `!"${name}" not:reprint legal:premodern`;
                 const query = await Scry.Cards.search(searchQuery).cancelAfterPage().waitForAll();
                 card = query[0];
                 cardCache[name] = card;
