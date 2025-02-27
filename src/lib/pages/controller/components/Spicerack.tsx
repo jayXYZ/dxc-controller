@@ -58,8 +58,8 @@ function Spicerack() {
             
             const newData = {
                 ...data,
-                p1name: `${selectedPlayer1.user.first_name} ${selectedPlayer1.user.last_name}`,
-                p2name: `${selectedPlayer2.user.first_name} ${selectedPlayer2.user.last_name}`,
+                p1name: `${selectedPlayer1.user.best_identifier}`,
+                p2name: `${selectedPlayer2.user.best_identifier}`,
                 p1deck: selectedPlayer1.decklist?.archetype,
                 p2deck: selectedPlayer2.decklist?.archetype,
                 p1decklist: selectedPlayer1.decklist?.plaintext_list,
