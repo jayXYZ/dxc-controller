@@ -38,12 +38,15 @@ const LiveSearch = <T extends string>({
     let nextIndexCount = 0;
 
     // move down
-    if (key === "ArrowDown")
+    if (key === "ArrowDown" || key === "Tab") {
+      e.preventDefault();
       nextIndexCount = (focusedIndex + 1) % results.length;
+    }
 
     // move up
-    if (key === "ArrowUp")
+    if (key === "ArrowUp") {
       nextIndexCount = (focusedIndex + results.length - 1) % results.length;
+    }
 
     // hide search results
     if (key === "Escape") {
@@ -110,7 +113,7 @@ const LiveSearch = <T extends string>({
                   ref={index === focusedIndex ? resultContainer : null}
                   style={{
                     backgroundColor:
-                      index === focusedIndex ? "rgba(0,0,0,0.1)" : "",
+                      index === focusedIndex ? "rgba(255, 255, 255, 0.2)" : "",
                   }}
                   className="cursor-pointer hover:bg-white hover:bg-opacity-20 p-2"
                 >

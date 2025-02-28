@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { socket } from "@/lib/utils/utils";
 import {
   Card,
@@ -7,10 +7,16 @@ import {
   CardTitle,
   CardFooter,
 } from "@/components/ui/card";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip"
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DataContext } from "@/lib/contexts/DataContext";
-import { RefreshCcw, X } from "lucide-react";
+import { RefreshCcw, X, ArrowLeftRight } from "lucide-react";
 
 const initialState = {
   p1name: "",
@@ -70,15 +76,57 @@ function PlayerForm() {
     setInputs(initialState);
   };
 
+  const handleSwap = () => {
+    setInputs((prev) => ({
+      ...prev,
+      p1name: prev.p2name,
+      p1deck: prev.p2deck,
+      p1record: prev.p2record,
+      p1gameswon: prev.p2gameswon,
+      p2name: prev.p1name,
+      p2deck: prev.p1deck,
+      p2record: prev.p1record,
+      p2gameswon: prev.p1gameswon,
+    }));
+  };
+
+  useEffect(() => {
+    handleSync();
+  }, [data]);
+
   return (
     <Card className="relative">
       <div className="absolute right-0">
-        <Button variant="ghost" size="icon" onClick={handleSync}>
-          <RefreshCcw />
-        </Button>
-        <Button variant="ghost" size="icon" onClick={handleClear}>
-          <X />
-        </Button>
+      <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={handleSwap}>
+                <ArrowLeftRight />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Swap Players</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={handleSync}>
+                <RefreshCcw />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Sync</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button variant="ghost" size="icon" onClick={handleClear}>
+                <X />
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent>Clear</TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
       </div>
 
       <div className="flex flex-col gap-2">

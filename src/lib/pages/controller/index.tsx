@@ -2,7 +2,8 @@ import CardImagePicker from "./components/CardImagePicker";
 import PlayerForm from "./components/PlayerForm";
 import TopBar from "./components/TopBar";
 import Timer from "./components/Timer"
-import LifeOverride from "./components/LifeOverride";
+import Spicerack from "./components/Spicerack";
+//import LifeOverride from "./components/LifeOverride";
 import { ThemeProvider } from "@/components/theme-provider";
 
 function Controller({ connected }: { connected: boolean }) {
@@ -14,7 +15,7 @@ function Controller({ connected }: { connected: boolean }) {
           <PlayerForm />
           <div className="flex flex-row gap-6 grow">
             <div className="grow">
-              <LifeOverride />
+              <Spicerack />
             </div>
             <div className="grow">
               <Timer />
